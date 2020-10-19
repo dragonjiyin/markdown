@@ -1,0 +1,251 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+</script>
+
+# 1. 写作排版篇
+## 1.1 Microsoft Word 技巧
+- 插入参考文献/图（表）名的正确姿势
+- 插入图表公式的正确姿势
+
+### 1.1.1 交叉引用
+写论文时参考文献、图（表）的顺序经常会发生变化。如果依靠手动检查并替换，不仅会花费大量的时间，还难免出现纰漏。而 Microsoft Word 的交叉引用可以很好的解决这个问题。以下通过示例分别演示图（表）名的交叉引用方法。
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/交叉引用.gif)
+如果图名的顺序发生了变化，只需要选中右键更新域即可。
+
+### 1.1.2 表格的隐藏技能（插入公式/并排图形）
+你是否还在利用空格调整公式编号的位置，将两张图形并排时图名不能随你摆布，这些问题表格都可以帮你解决。
+- 插入公式：
+1. 建立一行三列的表格
+2. 调整第一列和第三列的宽度
+
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/公式.gif)
+
+## 1.2 Markdown 排版技巧
+本文是利用 Markdown 语言编写的，有兴趣的同学可以研究下此部分的内容。  
+> Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
+
+先贴一个非常好用的在线 Markdown 编辑器：
+[让微信排版变 nice](https://www.mdnice.com/)  
+在此网站编写文本后可直接贴到微信公众号、知乎等网站。Markdown 语法同样可参考此网站。
+
+![在线 Markdown 编辑器](https://raw.githubusercontent.com/dragonjiyin/markdown/master/mdnice界面.png)
+
+Markdown 语言比较简单，看完该网站的实例基本就能掌握，对初学者较为困难的是公式的编写和图片的上传。如果你具有 LaTex 基础，公式的编写不是难题，没有基础的同学可以移步：
+> [Markdown中 LaTex 数学公式基本语法](https://blog.csdn.net/u014630987/article/details/70156489)  
+> [使用 Markdown 输出 LaTex 数学公式](https://zhuanlan.zhihu.com/p/59412540)
+
+图片的上传可以参考此链接：
+[Markdown 中插入图片有什么技巧？](https://www.zhihu.com/question/21065229/answer/132993179)
+
+**注意：断行命令需要两个空格加回车，分段为插入空白行。**
+
+
+# 2 做图篇
+## 2.1示意图
+### 2.1.1 Adobe Ilustrate
+
+### 2.1.2 visio
+
+### 2.1.2 LaTex tikz画图宏包
+二维、三维、甚至动画示意图均可利用 LaTeX 绘制，[TeXample.net](https://texample.net/tikz/examples/) 上有丰富的案例供学习。以下为 tikz 绘画示意图的一些案例：
+<div align = center>
+<img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/Polarizing.svg" width=400 height=400>
+<img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/beam.svg" width=400 height=400>
+</div>
+
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/animate.gif)
+
+[TikZ&PGF Manual for Version 3.1.6a](https://pgf-tikz.github.io/pgf/pgfmanual.pdf)、[TikZ & PGF 手册 (3.1.3) 笔记](http://static.latexstudio.net/article/2019/0621/ManualNotes-0620.pdf)、[A very minimal introduction to TikZ∗](https://cremeronline.com/LaTeX/minimaltikz.pdf)都是一些网上可以下载到的学习手册。
+## 2.2 数据图
+### 2.2.2 LaTex 画图 1
+LaTex 的 pgfplots 宏包可以用来绘画矢量图形。并且你如果使用 LaTex 编写论文，图形中的字体和正文字体可以保持一致，看起来很舒服。可能有的同学并没有安装 LaTex 软件，因此提供一个在线编辑的网站：
+> [overleaf 在线编辑网站](https://www.overleaf.com/project)  下图为该网站的编辑页面：
+![12](https://raw.githubusercontent.com/dragonjiyin/markdown/master/overleaf.png)
+
+以下为一个曲线图的示例：
+对应的程序及解释如下所示：
+```tex
+\documentclass{standalone}       % 文档为单独的一张图片，没有多余的空白
+\usepackage{pgfplots}            % 画图所需要的宏包
+\usepackage{xeCJK}               % 中文宏包
+\begin{document}                 % 导言区结束，开始正文的编写
+	\begin{tikzpicture}          % 开始画图
+	\begin{axis}[                % 坐标轴参数的设置    
+	xlabel = {这是 $x$(x)},       % x 轴坐标标签
+	ylabel = {这是 $y$(y)},       % y 轴坐标标签
+	]
+	\addplot [ samples=100,thick,red,domain=0:10] {sin(deg(x))};
+	\addplot [ samples=100,thick,blue,domain=0:10] {cos(deg(x))};
+	\legend{$\sin x$,$\cos x$}   % 图例
+	\end{axis}                   
+	\end{tikzpicture}
+\end{document}
+```
+其对应的图形如下图所示：
+<div align=center>
+<img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/1.svg" width=400 height=400 />
+</div>
+
+如果要简单的绘画其它函数的图形，实际上只需要改变以下两行即可：
+```tex
+\addplot [thick,red,domain=0:10，samples=100] {sin(deg(x))};
+\addplot [thick,blue,domain=0:10，samples=100] {cos(deg(x))};
+```
+其中 `\addplot` 代表在 `axis` 环境下绘制图形，其使用方法如下：
+```tex
+\addplot[option] {expression of 2D function};
+```
+方括号中的 `option` 代表设置一些图形的参数，例如线宽、颜色等。示例中的 thick 代表线宽为"粗"，当然你可以根据自己的喜好更改图形的线宽。由细至粗的线宽参数为 `ultra thin`, `very thin`, `thin`, `semithick`, `thick`, `very thick` 和 `ultra thick`。图形的颜色也包括 `red`, `green`, `blue`, `cyan`, `magenta`, `yellow`, `black` 等。`domain=0:10` 代表 $x$ 的定义域为 [0,10]，`samples=100` 代表绘画曲线时的取样点为 100 个。如果具有一点 MATLAB 的基础，这个非常好理解，因为 `plot` 的绘画方式为描点画图，在 [0,10] 的范围内以均匀的间隔取 100 个点，如果取样点太少，会造成曲线不光滑。
+
+花括号中填写的是函数的表达式，`deg` 代表将 $x$ 转变为角度，即：
+$$\textrm{deg}(x) = x\times \frac{180}{\pi}$$
+
+当在一张图形中绘画的曲线超过两条时，需要增加图例 `\legend`，示例中 `$\sin x$` 会生成公式 $\sin x$，如果不加 `$$` 则生成 sinx，而 `\sin` 如果不加 `\` 则整体会变成斜体 $sin x$。
+### 2.2.2 LaTex 画图 2
+
+如果想将实验测得的数据绘成曲线图，即利用已有的数据绘图，可以先将数据储存成 txt 格式的文本。
+以 2000 - 2019 年高考报考人数与录取人数为例，数据（MSE.txt）的格式如下：  
+
+x &emsp;&emsp;&emsp; y1	&emsp;  &emsp;  y2  
+2000&emsp;	375 &emsp;&emsp;221  
+2001&emsp;	454	&emsp;&emsp;268  
+...  
+2017&emsp;	940	&emsp;&emsp;700  
+2018&emsp;	975	&emsp;&emsp;790.99  
+2019&emsp;	1031&emsp;&emsp;	820  
+
+其中 x 列代表年份，y1 列代表报考人数，y2 列代表录取人数。绘制的程序如下：
+```tex
+\begin{tikzpicture}         % 开始画图
+\begin{axis}[               % 坐标轴参数的定义
+xlabel = {年份},
+ylabel = {人数（万人）},
+ymin = 0,ymax = 1300,       % y 坐标轴的范围
+legend style={font=\small,legend columns=-1}
+]                           % 更改图例字体和排列方式
+    \addplot [mark =square*, red, thick,smooth] table [x=x,y=y1]  {MSE.txt};
+    \addplot [mark = triangle, blue, thick,smooth] table [x=x,y=y2] {MSE.txt};
+\legend{报考人数,录取人数}
+\end{axis}
+\end{tikzpicture}
+```
+补充：LaTex 中字体由大至小为：  
+>\tiny&emsp;
+\scriptsize&emsp;
+\footnotesize&emsp;
+\small&emsp;
+\normalsize&emsp;  
+\large&emsp;
+\Large&emsp;
+\LARGE&emsp;
+\huge&emsp;
+\Huge&emsp;  
+
+`legend columns=-1` 代表图例按行的方式排列。`mark=square*` 代表用实心的正方形标记样本点，而`mark=triangle*` 代表用空心的三角形标记样本点。 `smooth` 表示光滑连接个样本点。
+
+绘制的效果如下图所示：
+
+<div align = center>
+<img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/2.svg" width=400 height=400>
+</div>
+
+线图通常来反映数据变化的趋势，单纯的比较数据通常会使用柱状图。通过 tikz 画图同样可以轻松实现。
+数据 MSE2.txt 为 2020 和 2019 年五个省市的高考报名人数，数据格式如下所示：
+
+x	&emsp;y1&emsp;&emsp;y2&emsp;&emsp;z  
+1	&emsp;78.8&emsp;	76.8&emsp;	广东  
+2	&emsp;34.9&emsp;    33.9&emsp;	江苏  
+3	&emsp;53.7&emsp;	50.0&emsp;	湖南  
+4	&emsp;21.1&emsp;	20.6&emsp;	黑龙江  
+5	&emsp;67.0&emsp;	65.0&emsp;	四川  
+
+x 为 5 省市的序号，y1 和 y2 分别为 2020 和 2019 年的高考报名数据。
+
+```tex
+\begin{tikzpicture}
+\begin{axis}[
+ylabel = {人数（万人）},
+ybar,bar width = 10,                     % 画柱形图，柱宽为 10
+xtick = {1,2,3,4,5},                     % x 轴刻度
+xticklabels = {广东,江苏,湖南,黑龙江,四川},	 % x 轴刻度对应的标签
+xtick align=inside, ylabel near ticks,   % x 轴刻度朝内
+legend style={font=\small                % 图例字体
+}	
+\end{axis}
+\end{tikzpicture}
+```
+图片效果如下：
+
+<div align = center>
+<img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/3.svg" width=400 height=400>
+</div>
+
+### 2.2.3 MATLAB 
+有时候数据可能需要通过计算得到，而 LaTeX 完成不了这个工作。
+这时有两种方法，一种是通过 MATLAB 计算得到数据，再用 LaTeX 画图；另一种方法是直接通过 MATLAB 进行绘图。
+> 惯例，先贴一个可以在线编写 MATLAB 语言的网站：
+[Octave Online](https://octave-online.net/)  
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/octave.png)
+
+MATLAB 画图的语法也很容易看懂，还是先从曲线图开始介绍。
+最基础的二维曲线图画图命令为 `plot(X,Y)`，其中，X 为 $x$ 坐标，Y 为 $y$ 轴坐标，然后通过坐标描点画图。 同样以三角函数曲线为例：
+```MATLAB
+x = 0:0.01:10;                      % x 坐标向量
+y1 = sin(x);                        % y 坐标向量（sinx）
+y2 = cos(x);						% y 坐标向量（cosx）
+plot(x,y1,'b','linewidth',1.5);		% 画 sinx 曲线，线粗 1.5
+hold on;							% 将曲线画在一张图上
+plot(x,y2,'r','linewidth',1.5);		
+xlabel('x');						% x 坐标标签
+ylabel('y')							% y 坐标标签
+legend('sinx','cosx')				% 图例
+set(gca,'Fontsize',15)				% 更改当前图形（gca）字号
+```
+其得到的效果如下：
+<div align = center>
+    <img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/4.svg" width=400>
+</div>
+
+其实和 LaTeX 画出来的效果区别不是很大，只不过想使 MATLAB 的图形变得和 LaTeX 一样美观需要调节一些参数。当然，有时需要一定的计算才能得到结果，单独依靠 LaTeX 可能满足不了需求。因此，掌握一门简单的编程语言还是非常重要的，而 MATLAB 在科学计算方面非常的完善，语法也比较简单。因为它内置有许多的函数和工具箱，不需要做下游的工作，科研时想要快速、省心的验证自己的想法，MATLAB 无疑是个非常好的选择。
+
+画柱形图的命令为 `bar(y)` 例如：
+```MATLAB
+y = [78.8  	76.8
+	34.9	33.9
+	53.7	50.0
+	21.1	20.6
+	67.0	65.0];
+bar(y);						% 柱形图
+legend('2020年','2019年')	% 图例 
+set(gca,'xticklabel',{'广东','江苏','湖南','黑龙江','四川'},'fontsize',12)	
+							% 更改 x 轴刻度标签和图形字号 
+ylabel('人数/万人')			% y 轴标签
+```
+
+效果图如下，MATLAB 柱形图的默认配色着实很理工。颜色区分鲜明，调整一下图形参数可能会更好一些。
+<div align = center>
+    <img src="https://raw.githubusercontent.com/dragonjiyin/markdown/master/5.svg" width=400>
+</div>
+
+# 3 文献阅读工具
+除知网 CAJ 格式以外的文献，基本都是 pdf 文档，所以选择一款好用的阅读器能大大提高效率。pdf 阅读器推荐使用 Adobe Reader（可以阅读 pdf 格式的三维图、动图）、Foxit Reader（福昕阅读器），编辑推荐使用 Adobe Acrobat（功能齐全，但软件有点大，有些功能用起来会有些卡顿）。
+## 3.1 pdf 阅读器
+主要介绍 Foxit Reader，它可以在 pdf 文档上进行一些简单的注释，例如打字机、文本框形状等都非常实用。比如在阅读文献时遇见不认识的单词、思考总结都可以用打字机在旁边进行注释。保存文档，这样下次再查看文献时就能更快回想起文献的内容。
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/Foxit.png)
+但是 Foxit 存在一个缺点，它不能看 pdf 格式的视频和动图，而 Adobe Reader 可以，但其只有普通的阅读功能，最齐全的是  Adobe Acrobat。平常的使用  Adobe Reader+Foxit 功能互补，组合起来够用了。
+## 3.2 文献管理工具
+研究僧需要查阅大量的文献，但是时间一长，前面看过的文献就很难回想起来。有时需要的文献在文件夹中怎么也找不到，而文献管理工具就可以让你很顺手的找到想要的文献。本文主要介绍 Zotero，Zotero 是一款开源软件，能让你轻松的收集整理、引用、抓取文献及其信息。
+zotero 的安装过程可参考：[Zotero使用教程](https://blog.csdn.net/zhouchen1998/article/details/103298165)
+
+### 3.2.1 从网上抓取文献
+可以 Science 上网的盆友在 Chorme 安装好插件后，就可以愉快的在线下载文献了。
+在谷歌学术输入关键词检索文献 $\rightarrow$ 点击 Zotero connector 插件 $\rightarrow$ 勾选需要下载文献 $\rightarrow$ 点击 OK $\rightarrow$ 选择保存的路径 $\rightarrow$ 点击完成。
+
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/zotero1.svg)
+
+注意，此时只有文献后显示 [pdf] 快速访问链接的可以直接下载到 pdf 文档，而没有的需要访问文献的详细界面下载。
+
+![](https://raw.githubusercontent.com/dragonjiyin/markdown/master/zotero2.svg)
+
+下载好之后即可在 Zotero 内看到条目。在其中点击pdf文档即可打开文献，并可以在软件窗口的右侧对文献添加笔记和标签等。引用文献也非常方便，如果是用 LaTeX 排版论文，则可以直接可以选择需要引用的条目 $\rightarrow$ 鼠标右键 $\rightarrow$ 导出 Bibtex。而 word 则可以用插件来完成参考文献的插入。可参考：[参考文献管理——简易Zotero教程](https://blog.csdn.net/xjp_xujiping/article/details/100579165?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
